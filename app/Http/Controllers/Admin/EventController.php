@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Event;
 
+use App\Models\Tag;
+
 class EventController extends Controller
 {
     /**
@@ -27,7 +29,10 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+
+        $tags = Tag :: all();
+
+        return view('events.create', compact('tags'));
     }
 
     /**
@@ -38,7 +43,23 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        
+        $newEvent = new Event();
+
+        $newEvent ->nome_evento = $data['nome_evento'];
+        //associo percorso file a campo img della tabella
+        $newEvent ->img_riferimento = $data['img_riferimento'];
+        $newEvent ->descrizione = $data['descrizione'];
+        $newEvent ->data_pubblicazione = $data['data_pubblicazione'];
+
+        $newEvent -> save();
+
+        //creazione relazione molti a molti
+        $newEvent -> tags() -> attach($data['tag_id']);
+
+        return redirect() -> route('events.index');
+
     }
 
     /**
@@ -50,7 +71,8 @@ class EventController extends Controller
     public function show($id)
     {
         $event = Event :: find($id);
-        return view('events.show', compact('event'));
+        $tags = Tag :: all();
+        return view('events.show', compact('event','tags'));
     }
 
     /**

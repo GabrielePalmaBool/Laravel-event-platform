@@ -6,4 +6,14 @@
 <p>{{ $event -> descrizione }}</p>
 <span>{{ $event -> data_pubblicazione }}</span>
 
+<br>
+<ul>
+    @foreach ( $event ->tags as $tag )
+            <li>
+                #{{ $tag ->name}}
+            </li>
+    @endforeach
+</ul>
+        
+
 @endsection

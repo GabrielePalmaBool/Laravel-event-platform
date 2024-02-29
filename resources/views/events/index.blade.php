@@ -9,4 +9,7 @@
     </li>
     @endforeach
 </ul>
+
+    <a class="btn btn-danger" href="{{ route('events.create') }}" role="button">Nuovo evento</a>
+
 @endsection

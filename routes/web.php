@@ -20,6 +20,10 @@ use App\Http\Controllers\TagController;
 Route::get('/', [EventController :: class, 'index']) -> name('events.index');
 Route::get('/tags', [TagController :: class, 'index']) -> name('tags.index');
 
+Route::get('/create', [EventController :: class, 'create']) -> name('events.create');
+
+Route::post('/create', [EventController :: class, 'store']) -> name('events.store');
+
 Route::get('/{id}', [EventController :: class, 'show']) -> name('events.show');
 
 Route::get('/dashboard', function () {
