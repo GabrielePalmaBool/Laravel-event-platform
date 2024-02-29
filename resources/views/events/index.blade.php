@@ -6,6 +6,7 @@
     @foreach ($events as $event)
     <li>
         <a href="{{ route('events.show', $event -> id) }}">{{ $event -> nome_evento }}</a>
+        <a class="btn btn-warning me-3" href="{{ route('events.edit', $event->id) }}">Modifica</a>
     </li>
     @endforeach
 </ul>

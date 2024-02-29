@@ -71,8 +71,7 @@ class EventController extends Controller
     public function show($id)
     {
         $event = Event :: find($id);
-        $tags = Tag :: all();
-        return view('events.show', compact('event','tags'));
+        return view('events.show', compact('event'));
     }
 
     /**
@@ -83,7 +82,10 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        //
+        $event = Event :: find($id);
+        $tags = Tag :: all();
+
+        return view('events.edit', compact('event', 'tags'));
     }
 
     /**
@@ -95,7 +97,19 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $event = Event :: find($id);
+        
+        $event -> nome_evento = $data['nome_evento'];
+        $event -> img_riferimento = $data['img_riferimento'];
+        $event -> descrizione = $data['descrizione'];
+        $event -> data_pubblicazione = $data['data_pubblicazione']; 
+        
+        $event -> save();
+
+        $event -> tags() -> sync($data['tag_id']);
+
+        return redirect() -> route('events.index');
     }
 
     /**

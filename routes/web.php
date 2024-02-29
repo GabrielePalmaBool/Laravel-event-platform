@@ -26,6 +26,10 @@ Route::post('/create', [EventController :: class, 'store']) -> name('events.stor
 
 Route::get('/{id}', [EventController :: class, 'show']) -> name('events.show');
 
+Route::get('/{id}/edit', [EventController::class, 'edit']) ->name('events.edit');
+
+Route::put('/{id}', [EventController::class, 'update']) ->name('events.update');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
