@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\TagController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [EventController :: class, 'index']) -> name('events.index');
+Route::get('/tags', [TagController :: class, 'index']) -> name('tags.index');
+
+Route::get('/{id}', [EventController :: class, 'show']) -> name('events.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
