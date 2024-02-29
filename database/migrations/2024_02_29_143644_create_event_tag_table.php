@@ -13,15 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('event_tag', function (Blueprint $table) {
             $table->id();
-
-            $table-> string('nome_evento');
-            $table-> string('img_riferimento')->nullable();
-            $table-> string('descrizione')->nullable();
-            $table-> date('data_pubblicazione');
-
-            $table->timestamps();
         });
     }
 
@@ -32,6 +25,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('event_tag');
     }
 };
