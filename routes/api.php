@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\ApiController;
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,4 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route :: group(['prefix' => '/v1'], function(){
 
     Route :: get('events', [ ApiController :: class, 'getEvents']);
+
+    Route :: post('user', [ ApiController :: class, 'getUser']);
+
+    Route::get('login', [AuthenticatedSessionController::class, 'create']) ->name('login');
 });
