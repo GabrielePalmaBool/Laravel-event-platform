@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -45,13 +46,18 @@ class EventController extends Controller
     {
         $data = $request->all();
         
+        $user = Auth::user();
+        // dd($user);
+
         $newEvent = new Event();
 
-        $newEvent ->nome_evento = $data['nome_evento'];
+        $newEvent -> nome_evento = $data['nome_evento'];
         //associo percorso file a campo img della tabella
-        $newEvent ->img_riferimento = $data['img_riferimento'];
-        $newEvent ->descrizione = $data['descrizione'];
-        $newEvent ->data_pubblicazione = $data['data_pubblicazione'];
+        $newEvent -> img_riferimento = $data['img_riferimento'];
+        $newEvent -> descrizione = $data['descrizione'];
+        $newEvent -> data_pubblicazione = $data['data_pubblicazione'];
+
+        $newEvent -> user() -> associate($user);
 
         $newEvent -> save();
 
