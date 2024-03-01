@@ -6,21 +6,40 @@ export default{
   data(){
     return{
       events: [],
-      createActive: false,
-      newEvent:{
-        name:''
-      }
     }
+  },
+
+  mounted(){
+    axios.get('http://localhost:8000/api/v1/events')
+    .then(res => {
+      const data = res.data;
+        this.events = data.events;
+        console.log("events:", this.events)
+    })
+    .catch(err => {
+      console.err(err);
+    })
+  },
+
+  methods:{
+    
   }
 }
 
 </script>
 
 <template>
- <h1>Hello</h1>
+  <div class="text-center">
+    <h1>Eventi</h1>
+    <div>
+      <ol>
+        <li v-for="event in events" :key="event.id">
+            {{ event.nome_evento }}
+        </li>
+      </ol>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">
-@use "./styles/general.scss";
-
 </style>
