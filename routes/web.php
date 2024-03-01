@@ -18,8 +18,8 @@ use App\Http\Controllers\TagController;
 
 Route::get('/tags', [TagController :: class, 'index']) -> name('tags.index');
 
-Route::get('/events', [EventController :: class, 'index']) -> name('events.index');
-Route::get('/events/show/{id}', [EventController :: class, 'show']) -> name('events.show');
+Route::get('/', [EventController :: class, 'index']) -> name('events.index');
+Route::get('/show/{id}', [EventController :: class, 'show']) -> name('events.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -31,11 +31,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Event
-    Route::get('/events/{id}/edit', [EventController::class, 'edit']) ->name('events.edit');
-    Route::put('/events/{id}', [EventController::class, 'update']) ->name('events.update');
+    Route::get('/create', [EventController :: class, 'create']) -> name('events.create');
+    Route::post('/create', [EventController :: class, 'store']) -> name('events.store');
 
-    Route::get('/events/create', [EventController :: class, 'create']) -> name('events.create');
-    Route::post('/events/create', [EventController :: class, 'store']) -> name('events.store');
+    Route::delete('/{id}/destroy', [EventController :: class, 'destroy']) ->  name('events.destroy');
+
+    Route::get('/{id}/edit', [EventController::class, 'edit']) ->name('events.edit');
+    Route::put('/{id}', [EventController::class, 'update']) ->name('events.update');
+
 });
 
 require __DIR__.'/auth.php';
