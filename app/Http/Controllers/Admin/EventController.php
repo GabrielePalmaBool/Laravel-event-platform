@@ -47,7 +47,7 @@ class EventController extends Controller
         $data = $request->all();
         
         $user = Auth::user();
-        // dd($user);
+        //dd($user);
 
         $newEvent = new Event();
 
