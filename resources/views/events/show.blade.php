@@ -18,6 +18,7 @@
                             </li>
                         @endforeach
                     </ul>
+                    <p>{{ $event->user->name }}</p>
                 </div>
             </div>
         </div>
