@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers\Api;
 
+
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 
 use App\Models\Event;
 
+use App\Models\User;
+
 class ApiController extends Controller
 {
-    public function getUser(){
+    public function LogUser(Request $request)
+    
+    {
+            $http = new Client;
 
-        
-
-        // return response() -> json([
-        //     'status' => 'success',
-        //     'message' => "Questo e' un messaggio di test"
-        // ]);
+            $response = $http->post("");
     }
 
     public function getEvents(){

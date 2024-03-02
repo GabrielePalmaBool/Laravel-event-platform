@@ -9,12 +9,37 @@ export default {
             login: false,
 
             user: {
-                email: "prova@hotmail",
+                email: "gbayer@example.org",
                 password: "password",
             },
 
             events: [],
+            users: [],
         };
+    },
+
+    methods: {
+        UserLogin() {
+            this.login = true;
+        },
+
+        createUser() {
+            console.log("submit with: ", this.user);
+
+            axios
+                .get("http://localhost:8000/api/v1/user")
+
+                .then((res) => {
+                    const data = res.data;
+                    this.users.push(data.user);
+                    console.log("events:", this.events);
+                    console.log(data);
+                })
+
+                .catch((err) => {
+                    console.log("Errori", err);
+                });
+        },
     },
 
     mounted() {
@@ -29,30 +54,50 @@ export default {
                 console.err(err);
             });
     },
-
-    methods: {
-        insUser() {
-            axios
-                .get("http://localhost:8000/api/v1/login")
-
-                .then((res) => {
-                    const data = res.data;
-                    this.events = data.events;
-                    console.log("events:", this.events);
-                })
-
-                .catch((err) => {
-                    console.log("Errori", err);
-                });
-        },
-    },
 };
 </script>
 
 <template>
-    <div v-if="login" class="container">
-        <h1 class="mt-5 text-center">Eventi</h1>
-        <ul class="list-group col-6 mx-auto text-center">
+    <!-- Lista eventi -->
+    <div class="container">
+        <!-- Form per il login -->
+        <form v-if="login" @submit.prevent="createUser">
+            <h1 class="mt-5 text-center">Effettuare Login</h1>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                    >Inserire Email</label
+                >
+                <input
+                    type="email"
+                    class="form-control w-50"
+                    v-model="user.email"
+                    placeholder="Email User"
+                    name="email"
+                    id="email"
+                />
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label"
+                    >Password</label
+                >
+                <input
+                    type="password"
+                    class="form-control w-50"
+                    v-model="user.password"
+                    placeholder="User Password"
+                    id="password"
+                    name="password"
+                />
+            </div>
+            <input type="submit" class="btn btn-primary" value="login" />
+        </form>
+
+        <ul v-else class="list-group col-6 mx-auto text-center">
+            <h1 class="mt-5 text-center">Eventi</h1>
+
+            <button class="btn btn-danger" @click="UserLogin">Login</button>
+
             <li
                 v-for="event in events"
                 :key="event.id"
@@ -67,16 +112,22 @@ export default {
             </li>
         </ul>
     </div>
-
-    <form action="" @submit.prevent="createUser">
-        <input type="text" v-model="user.email" placeholder="Email User" />
-        <input
-            type="text"
-            v-model="user.password"
-            placeholder="User Password"
-        />
-        <input type="submit" value="login" @click="insUser()" />
-    </form>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.container {
+    .list-group {
+        button {
+            margin: 2% 40% 2% 40%;
+        }
+    }
+
+    form {
+        margin: 0% 0% 1% 30%;
+
+        h1 {
+            margin: 0% 50% 1% 0%;
+        }
+    }
+}
+</style>
