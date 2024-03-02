@@ -6,8 +6,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
-use GuzzleHttp\Client;
 
 use App\Models\Event;
 
@@ -18,9 +16,19 @@ class ApiController extends Controller
     public function LogUser(Request $request)
     
     {
-            $http = new Client;
+            $data = $request->all();
 
-            $response = $http->post("");
+            //$user_email = $data['email'];
+            $user_email = 1;
+
+
+            $user = User :: find($user_email);
+
+            return response()->json([
+                'status' => 'success',
+                'events' => $user
+            ]);
+
     }
 
     public function getEvents(){

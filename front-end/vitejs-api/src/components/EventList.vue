@@ -27,13 +27,11 @@ export default {
             console.log("submit with: ", this.user);
 
             axios
-                .get("http://localhost:8000/api/v1/user")
+                .post("http://localhost:8000/api/v1/login", this.user)
 
                 .then((res) => {
-                    const data = res.data;
-                    this.users.push(data.user);
-                    console.log("events:", this.events);
-                    console.log(data);
+                    this.users = res.data;
+                    console.log("user:", this.users);
                 })
 
                 .catch((err) => {
