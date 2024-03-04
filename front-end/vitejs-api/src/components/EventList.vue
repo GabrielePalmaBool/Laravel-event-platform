@@ -82,7 +82,7 @@ export default {
         </div>
         <ul v-else class="list-group col-6 mx-auto text-center">
             <h1 class="mt-5 text-center">Eventi</h1>
-            <router-link to="/">Home</router-link>
+            <router-link to="/about">About</router-link>
             <br>
             <router-link to="/tags">Tags</router-link>
 

@@ -2,9 +2,9 @@
 
 <template>
     <div>
-        <h1>Home</h1>
+        <h1>About</h1>
         <p>Welcome!</p>
-        <router-link to="/events">Eventi</router-link>
+        <router-link to="/">Eventi</router-link>
         <br>
         <router-link to="/tags">Tags</router-link>
     </div>
