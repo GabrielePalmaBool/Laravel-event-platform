@@ -1,12 +1,11 @@
 <script setup>
-import EventList from './components/EventList.vue'
 </script>
 
 <template>
-  <EventList/>
+  <router-view></router-view>
 </template>
 
-<style lang="scss">
-@use "./styles/general.scss";
 
+<style lang="scss">
+@use './styles/general.scss' as *;
 </style>

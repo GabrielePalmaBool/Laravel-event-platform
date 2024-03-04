@@ -64,30 +64,14 @@ export default {
                 <h1 class="mt-5 text-center">Effettuare Login</h1>
 
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label"
-                        >Inserire Email</label
-                    >
-                    <input
-                        type="email"
-                        class="form-control w-50"
-                        v-model="user.email"
-                        placeholder="Email User"
-                        name="email"
-                        id="email"
-                    />
+                    <label for="exampleInputEmail1" class="form-label">Inserire Email</label>
+                    <input type="email" class="form-control w-50" v-model="user.email" placeholder="Email User"
+                        name="email" id="email" />
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label"
-                        >Password</label
-                    >
-                    <input
-                        type="password"
-                        class="form-control w-50"
-                        v-model="user.password"
-                        placeholder="User Password"
-                        id="password"
-                        name="password"
-                    />
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control w-50" v-model="user.password" placeholder="User Password"
+                        id="password" name="password" />
                 </div>
                 <input type="submit" class="btn btn-primary" value="login" />
             </form>
@@ -98,20 +82,17 @@ export default {
         </div>
         <ul v-else class="list-group col-6 mx-auto text-center">
             <h1 class="mt-5 text-center">Eventi</h1>
+            <router-link to="/">Home</router-link>
+            <br>
+            <router-link to="/tags">Tags</router-link>
 
             <button class="btn btn-danger" @click="UserLogin(true)">
                 Login
             </button>
 
-            <li
-                v-for="event in events"
-                :key="event.id"
-                class="list-group-item d-flex justify-content-between align-items-center py-3"
-            >
-                <a
-                    class="link-underline link-underline-opacity-0 flex-grow-1"
-                    href="#"
-                >
+            <li v-for="event in events" :key="event.id"
+                class="list-group-item d-flex justify-content-between align-items-center py-3">
+                <a class="link-underline link-underline-opacity-0 flex-grow-1" href="#">
                     <h4 class="mb-0">{{ event.nome_evento }}</h4>
                 </a>
             </li>
