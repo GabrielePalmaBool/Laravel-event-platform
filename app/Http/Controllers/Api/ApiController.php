@@ -9,26 +9,18 @@ use Illuminate\Http\Request;
 
 use App\Models\Event;
 
-use App\Models\User;
+use App\Models\Tag;
 
 class ApiController extends Controller
 {
-    public function LogUser(Request $request)
     
-    {
-            $data = $request->all();
+    public function getTags(){
 
-            //$user_email = $data['email'];
-            $user_email = 1;
-
-
-            $user = User :: find($user_email);
-
-            return response()->json([
-                'status' => 'success',
-                'events' => $user
-            ]);
-
+        $tags = Tag :: all();
+        return response()->json([
+            'status' => 'success',
+            'tags' => $tags
+        ]);
     }
 
     public function getEvents(){

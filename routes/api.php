@@ -26,8 +26,6 @@ Route :: group(['prefix' => '/v1'], function(){
 
     Route :: get('events', [ ApiController :: class, 'getEvents']);
 
-    //Route :: post('user', [ ApiController :: class, 'LogUser']);
-    
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    Route :: get('tags', [ ApiController :: class, 'getTags']);
 
 });
