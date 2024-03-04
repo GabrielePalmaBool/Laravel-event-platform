@@ -19,8 +19,8 @@ export default {
     },
 
     methods: {
-        UserLogin() {
-            this.login = true;
+        UserLogin(value) {
+            this.login = value;
         },
 
         createUser() {
@@ -59,42 +59,49 @@ export default {
     <!-- Lista eventi -->
     <div class="container">
         <!-- Form per il login -->
-        <form v-if="login" @submit.prevent="createUser">
-            <h1 class="mt-5 text-center">Effettuare Login</h1>
+        <div class="form" v-if="login">
+            <form @submit.prevent="createUser">
+                <h1 class="mt-5 text-center">Effettuare Login</h1>
 
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                    >Inserire Email</label
-                >
-                <input
-                    type="email"
-                    class="form-control w-50"
-                    v-model="user.email"
-                    placeholder="Email User"
-                    name="email"
-                    id="email"
-                />
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label"
-                    >Password</label
-                >
-                <input
-                    type="password"
-                    class="form-control w-50"
-                    v-model="user.password"
-                    placeholder="User Password"
-                    id="password"
-                    name="password"
-                />
-            </div>
-            <input type="submit" class="btn btn-primary" value="login" />
-        </form>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label"
+                        >Inserire Email</label
+                    >
+                    <input
+                        type="email"
+                        class="form-control w-50"
+                        v-model="user.email"
+                        placeholder="Email User"
+                        name="email"
+                        id="email"
+                    />
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label"
+                        >Password</label
+                    >
+                    <input
+                        type="password"
+                        class="form-control w-50"
+                        v-model="user.password"
+                        placeholder="User Password"
+                        id="password"
+                        name="password"
+                    />
+                </div>
+                <input type="submit" class="btn btn-primary" value="login" />
+            </form>
 
+            <button class="btn btn-danger" @click="UserLogin(false)">
+                Indietro
+            </button>
+        </div>
         <ul v-else class="list-group col-6 mx-auto text-center">
             <h1 class="mt-5 text-center">Eventi</h1>
 
-            <button class="btn btn-danger" @click="UserLogin">Login</button>
+            <button class="btn btn-danger" @click="UserLogin(true)">
+                Login
+            </button>
 
             <li
                 v-for="event in events"
@@ -120,11 +127,15 @@ export default {
         }
     }
 
-    form {
+    .form {
         margin: 0% 0% 1% 30%;
 
         h1 {
             margin: 0% 50% 1% 0%;
+        }
+
+        button {
+            margin: -6% 50% 1% 8%;
         }
     }
 }
